@@ -11,9 +11,9 @@ Logic: https://supercompiler.wordpress.com/2014/05/28/implementing-word-ladder-g
 
 
 #### Steps
-1) Start a local Neo4j database.
+1) Start up a local Neo4j database.
 2) Run the Python file to create all the nodes and relationships.
-2) To find and visualise the shortest chain, run the below query in the Neo4j browser using the below Cypher query - replace start_word and end_word with your words of choice.
+2) In the Neo4j browser, enter the below Cypher query to find and visualise the shortest chain - replace start_word and end_word with your words of choice.
 ```cypher
 MATCH (a:Word3 {word:'start_word'}),(b:Word3 {word:'end_word'}), path = shortestPath((a)-[*..50]-(b)) RETURN path
 ```
