@@ -3,12 +3,10 @@
 Modelling the Word Ladder Game in a Neo4j Graph Database
 Author: Mei Yong
 https://github.com/mei-yong/neo4j_python_word_ladder
-
 """
 
 # Import libraries
-import pandas as pd
-from py2neo import Graph, Node, Relationship
+from py2neo import Graph, #Node, Relationship
 
 # Initialise the graph db
 uri = "bolt://localhost:7687"
@@ -22,6 +20,10 @@ with open("words.txt", 'r') as f:
     all_words = f.read().splitlines()
 
 word3 = [word for word in all_words if len(word)==3]
+
+# take only a sample because I don't want to kill my local toaster (aka laptop)
+from random import sample
+word3 = sample(word3, 500)
 
 #word3 = ['ace','ice','bce','ate','abe','act','ack'] #test
 
