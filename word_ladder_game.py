@@ -45,21 +45,21 @@ def identify_relationships(word_list):
 
 
 # Function that creates/merges neo4j nodes based on a list of words
-def create_nodes(word_list):
+def create_nodes(word_list, node_label):
     query = ""
     for word in word_list:
-        query += "MERGE(:Word3 {word:'" + word + "'})   "
+        query += "MERGE(:" + node_label + " {word:'" + word + "'})   "
     tx = graph.begin() # Initialise transaction
     tx.run(query) # Run the Cypher query
     tx.commit() # Commit the Cypher query
     
 
 # Function that creates/merges neo4j relationships based on a dictionary of relationships
-def create_relationships(rel_dict):
+def create_relationships(rel_dict, node_label):
     for k,v in rel_dict.items():
         if v != []:
             for word_pair in v:
-                query = "MATCH (a:Word3),(b:Word3) WHERE a.word='" + word_pair[0] + "' and b.word='" + word_pair[1] + "' MERGE (a)-[:STEP]->(b)   "
+                query = "MATCH (a:" + node_label + "),(b:" + node_label + ") WHERE a.word='" + word_pair[0] + "' and b.word='" + word_pair[1] + "' MERGE (a)-[:STEP]->(b)   "
                 tx = graph.begin() # Initialise transaction
                 tx.run(query) # Run the Cypher query
                 tx.commit() # Commit the Cypher query
@@ -83,12 +83,12 @@ import math
 start = 0 
 end = 500
 for batch in range(math.ceil(len(word3)/500)):
-    create_nodes(word3[start:end])
+    create_nodes(word3[start:end], node_label='Word3')
     start += 500
     end += 500
 
 # Create relationships - not in batches because each transaction only creates 1 relationship
-create_relationships(rel_dict)
+create_relationships(rel_dict, node_label='Word3')
 
 
 
@@ -99,10 +99,10 @@ rel_dict4 = identify_relationships(word4)
 start = 0 
 end = 500
 for batch in range(math.ceil(len(word4)/500)):
-    create_nodes(word4[start:end])
+    create_nodes(word4[start:end], node_label='Word4')
     start += 500
     end += 500
     
-create_relationships(rel_dict4)
+create_relationships(rel_dict4, node_label='Word4')
 
 
