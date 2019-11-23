@@ -82,12 +82,27 @@ rel_dict = identify_relationships(word3)
 import math
 start = 0 
 end = 500
-for batch in range(math.ceil(len(rel_dict)/500)):
+for batch in range(math.ceil(len(word3)/500)):
     create_nodes(word3[start:end])
     start += 500
     end += 500
 
 # Create relationships - not in batches because each transaction only creates 1 relationship
 create_relationships(rel_dict)
+
+
+
+# Do the same but for 4-letter words
+word4 = [word for word in all_words if len(word)==4]
+rel_dict4 = identify_relationships(word4)
+
+start = 0 
+end = 500
+for batch in range(math.ceil(len(word4)/500)):
+    create_nodes(word4[start:end])
+    start += 500
+    end += 500
+    
+create_relationships(rel_dict4)
 
 
