@@ -78,26 +78,16 @@ word3 = [word for word in all_words if len(word)==3]
 # Get relationships for 3-letter words
 rel_dict = identify_relationships(word3)
 
-# Create nodes in batches of 500 or else it kills the local toaster aka laptop
-create_nodes(word3[0:500])
-create_nodes(word3[500:1000])
-create_nodes(word3[1000:1500])
-create_nodes(word3[1500:2000])
-create_nodes(word3[2000:])
-
-# Create relationships in batches of 500
-
-create_relationships(rel_dict)
-
+# Create nodes in batches of 500 or else it kills the local toaster aka laptop - because each transaction creates 500 nodes in one go
 import math
 start = 0 
 end = 500
 for batch in range(math.ceil(len(rel_dict)/500)):
-    create_relationships(rel_dict[start:end])
+    create_nodes(word3[start:end])
     start += 500
     end += 500
 
-
-
+# Create relationships - not in batches because each transaction only creates 1 relationship
+create_relationships(rel_dict)
 
 
