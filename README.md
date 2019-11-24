@@ -8,6 +8,7 @@ Words text file: https://github.com/dwyl/english-words <br>
 Logic: https://supercompiler.wordpress.com/2014/05/28/implementing-word-ladder-game-using-neo4j/
 
 ### NOTE: I built this only for words between 3 to 6 characters long since most people can't think up longer words on the spot when playing the game
+### NOTE: It takes at least 15 minutes to complete execution. It might error if your machine does not have enough processing power / memory
 
 
 ### Steps
