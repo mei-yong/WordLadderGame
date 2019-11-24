@@ -5,10 +5,8 @@ Author: Mei Yong
 https://github.com/mei-yong/neo4j_python_word_ladder
 """
 
-# Import libraries
-from py2neo import Graph #, Node, Relationship
-
 # Initialise the graph db
+from py2neo import Graph 
 uri = "bolt://localhost:7687"
 user = "neo4j"
 password = "password"
@@ -17,7 +15,34 @@ graph = Graph(uri=uri, user=user, password=password)
 
 # Function that takes the list of words and finds the ones that are related to each other by 1 character
 def identify_relationships(word_list):
+    
+    
+    """ # broken code to fix
+    word_list = word3
+    
+    # Convert the list of word strings into a list of individual character lists
+    split_words = []
+    for word in word_list:
+        split_words.append(list(word))
+        
+    duplicate_split_words = [[word] * len(word) for word in split_words]
+    duplicate_split_words = [word for nested_list in duplicate_split_words for word in nested_list]
+    
+    #duplicate_split_words = [['a', 'a', 'a'],['a', 'a', 'a'],['a', 'a', 'a'],['a','b','a']]
 
+    x = 0
+    
+    for word in duplicate_split_words:
+        word[x] = '_'
+        if x == (len(word)-1):
+            x = 0
+        else:
+            x += 1
+        """
+        
+            
+        
+    
     # Create the list of buckets for identifying relationships
     bucket_list=[]
     for word in word_list:
@@ -104,5 +129,3 @@ for batch in range(math.ceil(len(word4)/500)):
     end += 500
     
 create_relationships(rel_dict4, node_label='Word4')
-
-
