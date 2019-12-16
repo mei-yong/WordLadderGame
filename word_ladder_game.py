@@ -64,9 +64,10 @@ def create_relationships(rel_dict, node_label):
         if v != []:
             for word_pair in v:
                 query = "MATCH (a:" + node_label + "),(b:" + node_label + ") WHERE a.word='" + word_pair[0] + "' and b.word='" + word_pair[1] + "' MERGE (a)-[:STEP]->(b)   "
-                tx = graph.begin() # Initialise transaction
-                tx.run(query) # Run the Cypher query
-                tx.commit() # Commit the Cypher query
+                graph.run(query)
+                #tx = graph.begin() # Initialise transaction
+                #tx.run(query) # Run the Cypher query
+                #tx.commit() # Commit the Cypher query
     
 
 # Function that takes a whole list of words and creates a neo4j gragh db based on it
